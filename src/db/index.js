@@ -12,8 +12,8 @@ const connect = () => {
         if (process.env.NODE_ENV !== 'production') {
             mongoose.set('debug', true);
         }
-        let db_address = ENV.DB_HOST + ENV.DB_NAME;
-        let a = mongoose.connect(db_address);
+        let db_address = `mongodb://${ENV.DB_HOST}:${ENV.DB_PORT}/${ENV.DB_NAME}`;
+        let a = mongoose.connect(db_address, { useNewUrlParser: true });
         let connection = mongoose.connection;
         connection.on('disconnected', () => {
             if (curConnectTimes < maxConnectTimes) {

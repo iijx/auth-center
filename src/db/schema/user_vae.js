@@ -1,7 +1,10 @@
-
+// 这里是appid为'wxf32a027f63a045c5'的 UserSchema
+const { configs } = require('../../config');
+const appid = 'wxf32a027f63a045c5';
 let mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
+const $CONFIG = configs[appid];
 
 
 const UserSchema = new Schema({
@@ -27,5 +30,5 @@ const UserSchema = new Schema({
         }
     }
 })
-
-mongoose.model('User_vae', UserSchema);
+console.log('13', $CONFIG.userModel)
+mongoose.model($CONFIG.userModel, UserSchema);

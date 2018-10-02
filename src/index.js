@@ -5,16 +5,7 @@ require('dotenv').config();
 
 const DB = require('./db');
 const Koa =  require('koa');
-const bodyParser = require('koa-bodyparser');
-const router = require('./router');
-// const logger = require('koa-logger');
-const checkAuth = require('./common/checkAuth');
-// const schedule = require('node-schedule');
-// const Config = require('./config');
-
-// schedule.scheduleJob('0 * * * * *', function(){
-//     // require('../src/crawler/movie');
-// });
+const appUseMiddleware = require('./middleWares');
 
 ;(async () => {
     await DB.connect();
@@ -24,12 +15,14 @@ const checkAuth = require('./common/checkAuth');
 
 const App = new Koa();
 
+appUseMiddleware(App);
 
-App
-    // .use(logger())
-    .use(checkAuth())
-    .use(bodyParser())
-    .use(router.routes())
-    .use(router.allowedMethods());
+// App
+//     // .use(logger())
+//     .use(checkAuth())
+//     .use(bodyParser())
+//     .use(router.routes())
+//     .use(router.allowedMethods());
 
+console.log('port', process.env.APP_PORT)
 App.listen(process.env.APP_PORT);
