@@ -1,17 +1,14 @@
-const { noLoginCheck, resolveTokenFromHeaders } = require("../../lib/util.js");
+const { noLoginCheck, resolveValueFromHeaders } = require("../../lib/util.js");
 const jwt = require('jsonwebtoken');
-console.log('type', typeof resolveTokenFromHeaders)
 const checkAuth = async (ctx, next) => {
     // 如果不需要登录
-    console.log(noLoginCheck(ctx.url))
+    console.log('不需要登录？', noLoginCheck(ctx.url))
     if (noLoginCheck(ctx.url)) {
-
         await next();
-        console.log('vae end', typeof next, next)
         return;
     }
     // 需要登录
-    const token = resolveTokenFromHeaders(ctx.headers);
+    const token = resolveValueFromHeaders(ctx.headers, 'token');
     if (token) {
         try {
             // const JWT_SECRET = configs.configKeyMapValue('JET_SECRET', ctx.Appid)            

@@ -5,6 +5,13 @@ const jwt = require('jsonwebtoken');
 
 
 const login = async (ctx, next) => {
+    // ctx.body = {
+    //     success: true,
+    //     result: 123
+    // };
+    // await next();
+    // return;
+    console.log('login')
     const result = await wx_jscode2session({
         js_code: ctx.request.body.code,
         appid: ctx.$config.appid,

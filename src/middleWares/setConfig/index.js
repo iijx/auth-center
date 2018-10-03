@@ -4,11 +4,11 @@ const { resolveValueFromHeaders } = require('../../lib/util');
 
 const setConfig = async (ctx, next) => {
     const appid = resolveValueFromHeaders(ctx.headers, 'appid');
-    if (!appid) await next();
-    else {
+    if (appid) {
         ctx.$config = appidMapConfig(appid) || {};
-        await next()
     }
+    
+    await next()
 }
 
 module.exports = setConfig;
