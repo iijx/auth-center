@@ -37,6 +37,7 @@ const connect = () => {
 
 const initSchema = () => {
     require('./schema/user_vae.js');
+    require('./schema/user_admin.js');
 }
 module.exports = {
     connect,
